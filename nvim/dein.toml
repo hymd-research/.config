@@ -2,6 +2,9 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
 repo = 'Shougo/denite.nvim'
 
 [[plugins]]
@@ -79,8 +82,8 @@ endfunction
 function! LightlineFilename()
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
         \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
         \  &ft == 'dein' ? dein#get_status_string() :
+        \  &ft == 'denite' ? denite#get_status_string() :
         \  '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
