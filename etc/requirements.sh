@@ -6,7 +6,3 @@ if [ ! -d "${HOME}"/.cache/dein ]; then
     rm ./installer.sh
 fi
 
-if [ ! -d "${HOME}"/.config/zsh/.zprezto ]; then
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${HOME}/.config/zsh/.zprezto"
-fi
-
