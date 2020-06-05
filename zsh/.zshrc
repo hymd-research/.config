@@ -9,6 +9,7 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+setopt CLOBBER
 
 # Customize to your needs...
 autoload -Uz zmv
@@ -17,4 +18,7 @@ alias zmv="noglob zmv -W"
 # Load nodenv automatically by appending
 # the following to ~/.zshrc:
 eval "$(nodenv init -)"
+# Load pyenv automatically by appending
+# the following to ~/.zshrc:
+eval "$(pyenv init -)"
 
