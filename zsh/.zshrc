@@ -15,6 +15,9 @@ setopt CLOBBER
 autoload -Uz zmv
 alias zmv="noglob zmv -W"
 
+# Load anyenv automatically by adding
+# the following to ~/.zshrc:
+eval "$(anyenv init -)"
 # Load nodenv automatically by appending
 # the following to ~/.zshrc:
 eval "$(nodenv init -)"
