@@ -18,10 +18,9 @@ alias zmv="noglob zmv -W"
 # Load anyenv automatically by adding
 # the following to ~/.zshrc:
 eval "$(anyenv init -)"
-# Load nodenv automatically by appending
-# the following to ~/.zshrc:
-eval "$(nodenv init -)"
-# Load pyenv automatically by appending
-# the following to ~/.zshrc:
-eval "$(pyenv init -)"
+# for pyenv
+export SDKROOT="$(xcrun --show-sdk-path)"
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
 
