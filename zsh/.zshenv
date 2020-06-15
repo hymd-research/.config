@@ -14,7 +14,7 @@ fi
 # XDG
 export XDG_CONFIG_HOME="$HOME/.config"
 #GoLang
-export GOPATH="$HOME/ProgramFiles/go"
+export GOPATH="$HOME/go"
 #Pyenv
 
 # The next line updates PATH for the Google Cloud SDK.
