@@ -1,7 +1,8 @@
 [[plugins]]
-repo = 'Shougo/deol.nvim'
+repo = 'airblade/vim-gitgutter'
 hook_add = '''
-    tnoremap <ESC> <C-\><C-n>
+    let g:gitgutter_git_executable = '/usr/local/bin/git'
+    let g:gitgutter_highlight_lines = 1
 '''
 
 [[plugins]]
@@ -9,6 +10,12 @@ repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo ='kristijanhusak/defx-icons'
+
+[[plugins]]
+repo = 'Shougo/deol.nvim'
+hook_add = '''
+    tnoremap <ESC> <C-\><C-n>
+'''
 
 [[plugins]]
 repo ='kristijanhusak/defx-git'
@@ -22,7 +29,17 @@ hook_add = '''
 		\ 'Deleted'   : 'x',
 		\ 'Unknown'   : '?'
 		\ }
-    :let g:defx_as_default_explorer = 1
+    let g:defx_as_default_explorer = 1
+    augroup defx
+        au!
+        au VimEnter * sil! au! FileExplorer *
+        au BufEnter * if s:isdir(expand('%')) | bd | exe 'Defx' | endif
+    augroup END
+
+    fu! s:isdir(dir) abort
+        return !empty(a:dir) && (isdirectory(a:dir) ||
+           \ (!empty($SYSTEMDRIVE) && isdirectory('/'.tolower($SYSTEMDRIVE[0]).a:dir)))
+    endfu
 '''
 
 [[plugins]]
@@ -114,11 +131,14 @@ hook_source = '''
 repo = 'tbodt/deoplete-tabnine'
 build = './install.sh'
 
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-    let g:gitgutter_git_executable = '/usr/local/bin/git'
+# go lang plugins
+[[plugins]]  # go completion
+repo = 'zchee/deoplete-go'
+build = 'make'
+on_ft = 'go'
+depends = ['deoplete.nvim']
+hook_source = '''
+    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 '''
 
 [[plugins]]  
@@ -127,7 +147,7 @@ hook_add = '''
 # it's take a long time to go get some go sources & build them.
 repo = 'fatih/vim-go'
 on_ft = 'go'
-hook_add = '''
+hook_source= '''
     "  参考: https://github.com/hnakamur/vim-go-tutorial-ja
 
     " :nextなどでバッファ移動時にファイルが変更されていれば書き込む
@@ -235,14 +255,4 @@ hook_add = '''
     " GoGenarate: コード生成
     " GoImpl: インターフェースを実装するメソッドスタブの生成
     " GoPlay: コードをGo Playground に公開する(リンクはバッファかクリップボードにコピーされる)
-'''
-
-# go lang plugins
-[[plugins]]  # go completion
-repo = 'zchee/deoplete-go'
-build = 'make'
-on_ft = 'go'
-depends = ['deoplete.nvim']
-hook_source = '''
-    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
 '''
