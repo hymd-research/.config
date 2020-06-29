@@ -1,0 +1,185 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo ='kristijanhusak/defx-icons'
+
+[[plugins]]
+repo ='kristijanhusak/defx-git'
+hook_add = '''
+    :let g:defx_as_default_explorer = 1
+	let g:defx_git#indicators = {
+		\ 'Modified'  : '+',
+		\ 'Staged'    : '●',
+		\ 'Untracked' : '?',
+		\ 'Renamed'   : '➜',
+		\ 'Unmerged'  : '═',
+		\ 'Deleted'   : 'x',
+		\ 'Unknown'   : '?'
+		\ }
+'''
+
+# motion {{{
+[[plugins]] # 上下移動改善
+repo = 'rhysd/accelerated-jk'
+on_map = {n = '<Plug>(accelerated'}
+hook_add = '''
+	nmap j <Plug>(accelerated_jk_gj)
+	nmap k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]] # Edge motion
+repo = 'haya14busa/vim-edgemotion'
+on_map = '<Plug>(edgemotion-'
+hook_add = '''
+	map <C-j> <Plug>(edgemotion-j)
+	map <C-k> <Plug>(edgemotion-k)
+'''
+
+[[plugins]] # word単位の移動改善
+repo = 'kana/vim-smartword'
+on_map = {n = '<Plug>(smartword-'}
+hook_add = '''
+	nmap w <Plug>(smartword-w)
+	nmap b <Plug>(smartword-b)
+	nmap e <Plug>(smartword-e)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+    let g:indent_guides_enable_on_vim_startup = 1
+'''
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+hook_add = '''
+    autocmd MyAutoCmd VimEnter * nested colorscheme iceberg
+'''
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'
+
+[[plugins]]
+repo = 'sheerun/vim-wombat-scheme'
+
+[[plugins]]
+repo = 'mengelbrecht/lightline-bufferline'
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+    let g:ale_completion_enabled = 1
+    let g:ale_linters = {
+        \ 'go' : ['gopls']
+        \ }
+'''
+
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = ['lightline-bufferline']
+hook_add = '''
+	" 現在のモードを表示しない
+	set noshowmode
+	" タブページを常に表示
+	set showtabline=2
+    " 最後の状態
+    "set laststatus=2
+
+    let g:lightline = {
+        \'colorscheme': 'nord',
+        \'mode_map': {
+        \    'c': 'NORMAL'
+        \},
+        \'active': {
+        \    'left':  [['mode', 'paste'],
+        \              ['fugitive', 'absolutepath']],
+        \    'right': [['lineinfo'],
+        \              ['percent'],
+        \              ['fileformat', 'fileencoding', 'filetype'],
+        \              ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok']]
+        \},
+        \'tabline': {
+        \    'left':  [['buffers']],
+        \    'right': [['close']]
+        \},
+        \'component_function': {
+        \    'modified': 'LightlineModified',
+        \    'readonly': 'LightlineReadonly',
+        \    'fugitive': 'LightlineFugitive',
+        \    'filename': 'LightlineFilename',
+        \    'fileformat': 'LightlineFileformat',
+        \    'filetype': 'LightlineFiletype',
+        \    'fileencoding': 'LightlineFileencoding',
+        \    'mode': 'LightlineMode'
+        \},
+        \'component_expand': {
+        \    'buffers': 'lightline#bufferline#buffers',
+        \    'linter_checking': 'lightline#ale#checking',
+        \    'linter_infos': 'lightline#ale#infos',
+        \    'linter_warnings': 'lightline#ale#warnings',
+        \    'linter_errors': 'lightline#ale#errors',
+        \    'linter_ok': 'lightline#ale#ok',
+        \},
+        \'component_type': {
+        \    'buffers': 'tabsel',
+        \    'linter_checking': 'right',
+        \    'linter_infos': 'right',
+        \    'linter_warnings': 'warning',
+        \    'linter_errors': 'error',
+        \    'linter_ok': 'right'
+        \}
+    \}
+
+    function! LightlineModified()
+        return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+
+    function! LightlineReadonly()
+        return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+    endfunction
+
+    function! LightlineFilename()
+      return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+            \ (&ft == 'dein' ? dein#get_status_string() :
+            \  &ft == 'denite' ? denite#get_status_string() :
+            \  '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+            \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    endfunction
+
+    function! LightlineFugitive()
+        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+            return fugitive#head()
+        else
+            return ''
+        endif
+    endfunction
+
+    function! LightlineFileformat()
+        return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
+
+    function! LightlineFiletype()
+        return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    endfunction
+
+    function! LightlineFileencoding()
+        return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+    endfunction
+
+    function! LightlineMode()
+        return winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
+'''

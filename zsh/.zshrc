@@ -10,11 +10,15 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 setopt CLOBBER
-
 # Customize to your needs...
 autoload -Uz zmv
 alias zmv="noglob zmv -W"
-
+# for Go
+export PATH="/usr/local/opt/go@1.11/bin:$PATH"
+# for openssl
+export PATH="/usr/local/Cellar/openssl@1.1/1.1.1g/bin:$PATH"
+# for direnv
+eval "$(direnv hook zsh)"
 # Load anyenv automatically by adding
 # the following to ~/.zshrc:
 eval "$(anyenv init -)"
@@ -23,4 +27,4 @@ export SDKROOT="$(xcrun --show-sdk-path)"
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
-
+eval "$(pyenv virtualenv-init -)"
