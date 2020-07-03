@@ -71,23 +71,30 @@ if dein#load_state(s:dein.dir)
 endif
 
 syntax enable
+syntax on
 
-set history=50
-set ruler
-set showcmd
-set incsearch
-set number
 set cursorline
 set cursorcolumn
 set expandtab
-set tabstop=4
+set hlsearch
+set history=50
+set ruler
+set incsearch
+set noshowmode
+set number
+set showcmd
 set smartindent
 set shiftwidth=4
-set noshowmode
+set splitright
+set tabstop=4
 set termguicolors
 
 map Q gq
 inoremap <C-u> <C-G>u<C-U>
+"noremap <C-h> <C-w><C-h>
+"noremap <C-j> <C-w><C-j>
+"noremap <C-k> <C-w><C-k>
+"noremap <C-l> <C-w><C-l>
 
 if has("autocmd")
     filetype plugin indent on
@@ -109,10 +116,4 @@ if has("autocmd")
     augroup END
 else
     set autoindent
-
-endif
-
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set hlsearch
 endif

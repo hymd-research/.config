@@ -6,16 +6,16 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'ryanoasis/vim-devicons'
-
-[[plugins]]
-repo ='kristijanhusak/defx-icons'
-
-[[plugins]]
 repo = 'Shougo/deol.nvim'
 hook_add = '''
     tnoremap <ESC> <C-\><C-n>
 '''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo ='kristijanhusak/defx-icons'
 
 [[plugins]]
 repo ='kristijanhusak/defx-git'
@@ -29,17 +29,6 @@ hook_add = '''
 		\ 'Deleted'   : 'x',
 		\ 'Unknown'   : '?'
 		\ }
-    let g:defx_as_default_explorer = 1
-    augroup defx
-        au!
-        au VimEnter * sil! au! FileExplorer *
-        au BufEnter * if s:isdir(expand('%')) | bd | exe 'Defx' | endif
-    augroup END
-
-    fu! s:isdir(dir) abort
-        return !empty(a:dir) && (isdirectory(a:dir) ||
-           \ (!empty($SYSTEMDRIVE) && isdirectory('/'.tolower($SYSTEMDRIVE[0]).a:dir)))
-    endfu
 '''
 
 [[plugins]]
@@ -91,6 +80,7 @@ defx = '''
 	nnoremap <silent><buffer><expr> o defx#async_action('open_or_close_tree')
 	nnoremap <silent><buffer><expr> O defx#async_action('open_tree_recursive')
 
+    nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
 	nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
 	nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 	nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')

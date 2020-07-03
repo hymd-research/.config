@@ -7,8 +7,15 @@ repo = 'Shougo/denite.nvim'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-    autocmd MyAutoCmd VimEnter * nested colorscheme iceberg
+    colorscheme iceberg
+    set background=dark
 '''
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'
+
+[[plugins]]
+repo = 'sheerun/vim-wombat-scheme'
 
 [[plugins]] # 上下移動改善
 repo = 'rhysd/accelerated-jk'
@@ -45,10 +52,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'arcticicestudio/nord-vim'
-
-[[plugins]]
-repo = 'sheerun/vim-wombat-scheme'
+repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'mengelbrecht/lightline-bufferline'
@@ -131,10 +135,10 @@ hook_add = '''
 
     function! LightlineFilename()
       return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-            \ (&ft == 'dein' ? dein#get_status_string() :
-            \  &ft == 'denite' ? denite#get_status_string() :
-            \  '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-            \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+            \(&ft == 'dein' ? dein#get_status_string() :
+            \ &ft == 'denite' ? denite#get_status_string() :
+            \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+            \('' != LightlineModified() ? ' ' . LightlineModified() : '')
     endfunction
 
     function! LightlineFugitive()
