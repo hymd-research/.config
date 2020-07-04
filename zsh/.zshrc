@@ -19,6 +19,8 @@ setopt CLOBBER
 # Customize to your needs...
 autoload -Uz zmv
 alias zmv="noglob zmv -W"
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # for Go
 export PATH="/usr/local/opt/go@1.11/bin:$PATH"
 # for openssl
