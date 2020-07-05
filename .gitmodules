@@ -1,3 +1,6 @@
 [submodule "zsh/.zprezto"]
 	path = zsh/.zprezto
 	url = https://github.com/sorin-ionescu/prezto
+[submodule "anyenv/anyenv-install"]
+	path = anyenv/anyenv-install
+	url = https://github.com/anyenv/anyenv-install
