@@ -81,6 +81,7 @@ set history=50
 set ruler
 set incsearch
 set noshowmode
+set nowrap
 set number
 set showcmd
 set smartindent

@@ -98,7 +98,7 @@ hook_add = '''
     "set laststatus=2
 
     let g:lightline = {
-        \'colorscheme': 'nord',
+        \'colorscheme': 'iceberg',
         \'mode_map': {
         \    'c': 'NORMAL'
         \},
