@@ -92,10 +92,6 @@ set termguicolors
 
 map Q gq
 inoremap <C-u> <C-G>u<C-U>
-"noremap <C-h> <C-w><C-h>
-"noremap <C-j> <C-w><C-j>
-"noremap <C-k> <C-w><C-k>
-"noremap <C-l> <C-w><C-l>
 
 if has("autocmd")
     filetype plugin indent on

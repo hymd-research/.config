@@ -23,13 +23,13 @@ hook_add = '''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-hook_add = '''
-    colorscheme iceberg
-    set background=dark
-'''
 
 [[plugins]]
 repo = 'arcticicestudio/nord-vim'
+hook_add = '''
+    colorscheme nord
+    set background=dark
+'''
 
 [[plugins]]
 repo = 'sheerun/vim-wombat-scheme'
@@ -75,15 +75,6 @@ repo = 'cespare/vim-toml'
 repo = 'mengelbrecht/lightline-bufferline'
 
 [[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-    let g:ale_completion_enabled = 1
-    let g:ale_linters = {
-        \ 'go' : ['gopls']
-        \ }
-'''
-
-[[plugins]]
 repo = 'maximbaz/lightline-ale'
 
 [[plugins]]
@@ -98,7 +89,7 @@ hook_add = '''
     "set laststatus=2
 
     let g:lightline = {
-        \'colorscheme': 'iceberg',
+        \'colorscheme': 'nord',
         \'mode_map': {
         \    'c': 'NORMAL'
         \},

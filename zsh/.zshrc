@@ -20,16 +20,12 @@ autoload -Uz zmv
 alias zmv="noglob zmv -W"
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# for Go
-export PATH="/usr/local/opt/go@1.11/bin:$PATH"
-# for openssl
-export PATH="/usr/local/Cellar/openssl@1.1/1.1.1g/bin:$PATH"
 # for direnv
 eval "$(direnv hook zsh)"
 # Load anyenv automatically by adding
 # the following to ~/.zshrc:
 eval "$(anyenv init -)"
-# for pyenv
+# for pyenv-virtualenv
 export SDKROOT="$(xcrun --show-sdk-path)"
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
